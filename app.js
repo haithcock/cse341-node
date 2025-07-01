@@ -1,24 +1,17 @@
 const express = require('express');
 const app = express();
-const router = express.Router();
+const logger = require('./middleware/logger');
+const mainRoutes = require('./routes/mainRoutes');
+const errors = require('./middleware/errors');
+
+app.use(express.json());
  
-router.get('/home', (req, res) => {
-  res.send('Hello World, This is home router');
-});
- 
-router.get('/profile', (req, res) => {
-  res.send('Hello World, This is profile router');
-});
- 
-router.get('/login', (req, res) => {
-  res.send('Hello World, This is login router');
-});
- 
-router.get('/logout', (req, res) => {
-  res.send('Hello World, This is logout router');
-});
- 
-app.use('/', router);
+app.use(logger); // Custom logger middleware
+app.use(errors.logRequestUrl); // Logs every request
+app.use('/', mainRoutes); // Main routes
+app.use(errors.handleNotFound); // 404 fallback
+app.use(errors.handleErrors);   // Error handler
+
  
 app.listen(process.env.PORT || 3000, () => {
   console.log('Web Server is listening at port ' + (process.env.PORT || 3000));
