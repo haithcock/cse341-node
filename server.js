@@ -13,9 +13,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongodb = require('./data/database.js');
+const routes = require('./routes/index.js');
 
 app.use(express.json());
- 
+app.use('/', routes); // Use the index.js routes
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -34,7 +35,7 @@ mongodb.initDb((err) => {
     console.log(err);
   } 
   else {
-    mongoose.connect(process.env.MONGODB_URI, {
+    mongoose.connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
