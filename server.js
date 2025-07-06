@@ -12,6 +12,7 @@ const errors = require('./middleware/errors');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const mongodb = require('./data/database.js');
 
 app.use(express.json());
  
@@ -28,15 +29,20 @@ app.use('/', mainRoutes); // Main routes
 app.use(errors.handleNotFound); // 404 fallback
 app.use(errors.handleErrors);   // Error handler
 
-//const port = 3000;
-// 
+mongodb.initDb((err) => {
+  if (err) {
+    console.log(err);
+  } 
+  else {
+    mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log('MongoDB connected'))
+    .catch((err) => console.error('MongoDB connection error:', err));
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log('MongoDB connected'))
-.catch((err) => console.error('MongoDB connection error:', err));
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Web Server is listening at port ' + (process.env.PORT || 3000));
+    app.listen(process.env.PORT || 3000, () => {
+      console.log('Web Server is listening at port ' + (process.env.PORT || 3000));
+    });
+  }
 });
