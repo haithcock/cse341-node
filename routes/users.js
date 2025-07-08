@@ -3,16 +3,16 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Users = require('../models/users');
+const contacts = require('../models/contacts');
 
 
-const usersController = require('../controllers/users');
+const contactsController = require('../controllers/contacts');
 
 
 
 
 
-router.get('/', usersController.getAll);
-router.get('/:id', usersController.getSingle);
+router.get('/', contactsController.getAll);
+router.get('/:id', contactsController.getSingle);
 
 module.exports = router;
