@@ -15,21 +15,25 @@ const bodyParser = require('body-parser');
 const mongodb = require('./data/database.js');
 const routes = require('./routes/index.js');
 
-app.use(express.json());
-app.use('/', routes); // Use the index.js routes
-app.use(cors());
-app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send("Every knee shall bow, every tongue confess that Jesus Christ is Lord!");
 });
 
-app.use(logger); // Custom logger middleware
-app.use(errors.logRequestUrl); // Logs every request
-app.use('/', mainRoutes); // Main routes
-app.use(errors.handleNotFound); // 404 fallback
-app.use(errors.handleErrors);   // Error handler
 
+app.use(cors());
+app.use(bodyParser.json());
+app.use(express.json());
+app.use(logger);
+app.use(errors.logRequestUrl);
+
+// Mount routes
+app.use('/', routes);
+app.use('/contacts', require('./routes/contactsRoute.js')); // Add this
+
+//Error handlers
+app.use(errors.handleNotFound);
+app.use(errors.handleErrors);
 mongodb.initDb((err) => {
   if (err) {
     console.log(err);
@@ -47,4 +51,3 @@ mongodb.initDb((err) => {
     });
   }
 });
-//this is a test

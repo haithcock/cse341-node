@@ -10,4 +10,4 @@ const contactsSchema = new mongoose.Schema({
   birthday: { type: String, required: true }
 });
 
-module.exports = mongoose.model('contacts', contactsSchema);
+module.exports = mongoose.model('Contact', contactsSchema);

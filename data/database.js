@@ -1,36 +1,24 @@
 //This file is located at: /home/haithcock/Desktop/cse341/cse341-node/data/database.js
-
-const dotenv = require('dotenv');
-dotenv.config();
-
 const MongoClient = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectId;
 
 let database;
 
 const initDb = (callback) => {
-        if (database) {
-            console.log("Database already initialized!");
-            return callback(null, database);
-        }
-        MongoClient.connect(process.env.MONGODB_URL)
-            .then((client) => {
-                database = client;
-                callback(null, database);
-            })
-            .catch((err) => {
-                callback(err);
-            });
+  if (database) {
+    return callback(null, database);
+  }
+  MongoClient.connect(process.env.MONGODB_URL)
+    .then(client => {
+      database = client.db();
+      callback(null, database);
+    })
+    .catch(err => callback(err));
 };
 
-const getDatabase =() => {
-    if (!database) {
-        throw new Error("Database not initialized. Call initDb first.");
-    }
-    return database;    
+const getDatabase = () => {
+  if (!database) throw Error('Database not initialized');
+  return database;
 };
 
-
-module.exports = {
-    initDb,
-    getDatabase
-};
+module.exports = { initDb, getDatabase };
