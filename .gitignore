@@ -2,3 +2,8 @@ node_modules/
 .env
 *.log
 uploads/
+routes.rest/
+*.env
+*.json
+*.md
+*.txt
