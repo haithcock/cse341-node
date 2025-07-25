@@ -14,7 +14,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongodb = require('./data/database.js');
 const routes = require('./routes/index.js');
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger-output.json'); 
 
 app.get('/', (req, res) => {
   res.send("Every knee shall bow, every tongue confess that Jesus Christ is Lord!");
@@ -26,7 +27,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(logger);
 app.use(errors.logRequestUrl);
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // Mount routes
 app.use('/', routes);
 app.use('/contacts', require('./routes/contactsRoute.js'));

@@ -7,3 +7,9 @@ routes.rest/
 *.json
 *.md
 *.txt
+*.swagger.js
+*.swagger.json
+*.swagger.yaml
+*.swagger.yml
+*swagger-output.json
+*swagger.js

@@ -6,6 +6,30 @@ const ObjectId = require('mongodb').ObjectId;
 const User = require('../models/userModel');
 const usersController = require('../controllers/users');
 
+
+
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     tags: [Users]
+ *     summary: Get all users
+ *     responses:
+ *       200:
+ *         description: Returns array of all users
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/User'
+ *       500:
+ *         description: Server error
+ */
+
+
+
+
 const getAll = async (req, res) => {
     try {
         const collection = mongodb.getDatabase().collection('users');
@@ -17,6 +41,34 @@ const getAll = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+
+
+/**
+ * @swagger
+ * /users/{id}:
+ *   get:
+ *     tags: [Users]
+ *     summary: Get single user by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: 507f1f77bcf86cd799439011
+ *     responses:
+ *       200:
+ *         description: User found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Server error
+ */
 
 
 const getSingle = async (req, res) => {
@@ -35,6 +87,22 @@ const getSingle = async (req, res) => {
     }
 };
 
+/**
+ * 
+ * @swagger
+ * /users:
+ *   post:
+ *     tags: [Users]
+ *     summary: Create a new user
+ *     requestBody:
+ *       required: true
+ *      content:
+ *        application/json:
+ *         schema:
+ *         type: object
+ *         properties:
+ *         
+ */
 
 const createUser = async (req, res) => {
     try {
@@ -53,7 +121,33 @@ const createUser = async (req, res) => {
     }
 };
 
-
+/**
+ * @swagger
+ * /users/{id}:
+ *   put:
+ *     tags: [Users]
+ *     summary: Update an existing user
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: 507f1f77bcf86cd799439011
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       204:
+ *         description: User updated successfully
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Server error
+ */
 
 const updootUser = async (req, res) => {
     try {
@@ -79,6 +173,27 @@ const updootUser = async (req, res) => {
     }
 };
 
+/**
+ * @swagger
+ * /users/{id}:
+ *   delete:
+ *     tags: [Users]
+ *     summary: Delete a user by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: 507f1f77bcf86cd799439011
+ *     responses:
+ *       204:
+ *         description: User deleted successfully
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Server error
+ */
 
 const deleteUser = async (req, res) => {
     try {
