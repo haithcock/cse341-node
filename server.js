@@ -29,7 +29,8 @@ app.use(errors.logRequestUrl);
 
 // Mount routes
 app.use('/', routes);
-app.use('/contacts', require('./routes/contactsRoute.js')); // Add this
+app.use('/contacts', require('./routes/contactsRoute.js'));
+app.use('/users', require('./routes/users.js'));
 
 //Error handlers
 app.use(errors.handleNotFound);
