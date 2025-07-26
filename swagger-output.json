@@ -19,7 +19,7 @@
   "paths": {
     "/users": {
       "get": {
-        "description": "",
+        "description": "This gets all users in the database",
         "responses": {
           "200": {
             "description": "OK"
@@ -30,7 +30,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Creates a new user. MUST CHANGE 'any' TO A VALID VALUE.",
         "responses": {
           "201": {
             "description": "Created"
@@ -69,7 +69,7 @@
     },
     "/users/{id}": {
       "get": {
-        "description": "",
+        "description": "Gets a user by ID.",
         "parameters": [
           {
             "name": "id",
@@ -93,7 +93,7 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Gets a user by ID and updates it. MUST CHANGE 'any' TO A VALID VALUE.",
         "parameters": [
           {
             "name": "id",
@@ -143,7 +143,7 @@
         }
       },
       "delete": {
-        "description": "",
+        "description": "Deletes a user by ID.",
         "parameters": [
           {
             "name": "id",

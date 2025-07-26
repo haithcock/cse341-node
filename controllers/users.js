@@ -88,7 +88,6 @@ const getSingle = async (req, res) => {
 };
 
 /**
- * 
  * @swagger
  * /users:
  *   post:
