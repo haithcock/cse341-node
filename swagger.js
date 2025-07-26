@@ -6,7 +6,8 @@ const doc = {
     title: "Users API",
     description: "API for managing users"
   },
-  host: "localhost:3000",
+//  host: "localhost:3000",
+  host: "https://cse341-summer.onrender.com",
   basePath: "/",
   schemes: ['http'],
   consumes: ['application/json'],
