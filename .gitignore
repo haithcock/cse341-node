@@ -4,4 +4,4 @@ node_modules/
 uploads/
 routes.rest/
 *.env
-*.json
+
